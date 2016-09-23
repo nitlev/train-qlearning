@@ -12,6 +12,7 @@ def main(argv):
     else:
         raise ValueError("valid arguments are train or run")
 
+
 def run(opts):
     from src.strategy import ConstantBrakeStrategy
     from src.controler import Controler
@@ -37,6 +38,7 @@ def run(opts):
         print("Train currently at x={} (s={})".format(train.position, train.speed))
         train.move(1)
     print("Train stopped at x={} (objective was {})".format(train.position, objective))
+
 
 if __name__ == '__main__':
     argv = sys.argv
