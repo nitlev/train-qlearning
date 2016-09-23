@@ -1,7 +1,8 @@
-from src.controler import Controler
 from src.record import BlackBox
 from src.strategy import ConstantBrakeStrategy
 from src.train import Train
+
+from src.physics.controler import Controler
 
 __author__ = "veltin"
 

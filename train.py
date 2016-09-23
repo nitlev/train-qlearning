@@ -1,5 +1,5 @@
-import sys
 import getopt
+import sys
 
 
 def main(argv):
@@ -14,9 +14,9 @@ def main(argv):
 
 
 def run(opts):
-    from src.strategy import ConstantBrakeStrategy
-    from src.controler import Controler
-    from src.train import Train
+    from src.physics.strategy import ConstantBrakeStrategy
+    from src.physics.controler import Controler
+    from src.physics.train import Train
 
     x_objective = None
     initial_speed = None
