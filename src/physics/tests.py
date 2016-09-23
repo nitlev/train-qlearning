@@ -1,6 +1,6 @@
-from src.record import BlackBox
-from src.strategy import ConstantBrakeStrategy
-from src.train import Train
+from src.physics.record import BlackBox
+from src.physics.strategy import ConstantBrakeStrategy
+from src.physics.train import Train
 
 from src.physics.controler import Controler
 
@@ -40,7 +40,15 @@ class TestControler:
         train.move(STANDARD_DURATION)
         assert train.speed <= initial_speed
 
-    def test_a_controler_cannot_go_back(self):
+    def test_a_controler_cannot_go_reverse(self):
         train = Train(0, 1, Controler(STANDARD_OBJECTIVE, STANDARD_STRATEGY))
         train.move(10)
         assert train.speed >= 0
+
+    def test_a_controler_cannot_brake_harder_than_train_max_brake(self):
+        train = Train(initial_position=0,
+                      initial_speed=20,
+                      controler=Controler(STANDARD_OBJECTIVE,
+                                          ConstantBrakeStrategy(20)))
+        train.move(1)
+        assert train.speed == 10
