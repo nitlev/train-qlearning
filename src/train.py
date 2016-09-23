@@ -4,10 +4,10 @@ class Train:
         self.speed = initial_speed
         self.controler = controler
         self.controler.set_train(self)
+        self.max_brake_strength = 10
 
     def move(self, duration):
         self._update_position_and_speed(duration)
-        self.controler.brake(duration)
 
     def _update_position_and_speed(self, duration):
         self._update_position(duration)

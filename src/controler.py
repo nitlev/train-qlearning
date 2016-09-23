@@ -20,4 +20,5 @@ class Controler:
         self._brake_with_force(brake_strength, duration)
 
     def _brake_with_force(self, brake_strength, duration):
-        self.train.speed = max(0, self.train.speed - brake_strength * duration)
+        actual_brake_strength = min(brake_strength, self.train.max_brake_strength)
+        self.train.speed = max(0, self.train.speed - actual_brake_strength * duration)
