@@ -1,5 +1,5 @@
 This is a toy reinforcement learning project. 
-The goal is to automate the breaking process of a train, without any prior knowledge of how a train should break in order to reach a particular point in space (on a linear axis)
+The goal is to automate the braking process of a train, without any prior knowledge of how a train should brake in order to reach a particular point in space (on a linear axis)
 
 # Training
 
