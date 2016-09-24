@@ -32,13 +32,11 @@ def run(opts):
 
     objective = x_objective or 100
     speed = initial_speed or 10
-    strategy = ConstantBrakeStrategy(15)
-    controler = Controler(objective, strategy)
-    train = Train(0, speed, controler)
+    controler = Controler(objective, ConstantBrakeStrategy(10))
+    train = Train(initial_position=0, initial_speed=speed, controler=controler, max_braking_power=10)
     while train.speed > 0:
-        print("Train currently at x={} (s={})".format(train.position, train.speed))
         train.move(1)
-    print("Train stopped at x={} (objective was {})".format(train.position, objective))
+    train.black_box.make_report(sys.stdout)
 
 
 if __name__ == '__main__':

@@ -26,10 +26,11 @@ class TestTrain:
 class TestBlackBox:
     def test_black_box_should_record_new_data(self):
         bb = BlackBox()
-        bb.record(1, 10)
-        bb.record(2, 20)
+        bb.record(1, 10, 0)
+        bb.record(2, 20, 1)
         assert bb.position_record == [1, 2]
         assert bb.speed_record == [10, 20]
+        assert bb.braking_record == [0, 1]
 
 
 class TestControler:
@@ -48,7 +49,8 @@ class TestControler:
     def test_a_controler_cannot_brake_harder_than_train_max_brake(self):
         train = Train(initial_position=0,
                       initial_speed=20,
+                      max_braking_power=10,
                       controler=Controler(STANDARD_OBJECTIVE,
                                           ConstantBrakeStrategy(20)))
         train.move(1)
-        assert train.speed == 10
+        assert train.current_brake_power == 10
