@@ -13,7 +13,7 @@ TODO
 Once your model is trained, you may use it by calling
     ```
     python train.py run path_to_model
-    ``
+    ```
     
 For now, you can run the model by calling :
-    python train.py run -x objective_x_coordinate -s initial_speed
+    ```python train.py run -x objective_x_coordinate -s initial_speed```
