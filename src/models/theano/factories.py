@@ -1,5 +1,6 @@
 import tensorflow as tf
-from src.models.theano.models import DeepQNetwork, NeuralNetwork
+
+from src.models.theano.models import NeuralNetwork
 
 
 def weight_variable(shape):
@@ -13,11 +14,11 @@ def bias_variable(shape):
 
 
 class NeuralNetworkFactory:
-    def __init__(self, input_shape, *layers):
+    def __init__(self, input_shape, layers):
         self.input_shape = input_shape
         self._layers = layers
 
-    def build(self):
+    def build(self, session):
         x = tf.placeholder("float", shape=[None, self.input_shape[1]], name="x")
         y = tf.placeholder("float", shape=[None], name="y")
 
@@ -37,4 +38,4 @@ class NeuralNetworkFactory:
         hidden1 = tf.nn.relu(tf.matmul(hidden0, W1) + b1)
         y_pred = tf.nn.relu6(tf.matmul(hidden1, W2) + b2) / 6
 
-        return NeuralNetwork(x, y, y_pred)
+        return NeuralNetwork(x, y, y_pred, session)

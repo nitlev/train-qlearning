@@ -1,7 +1,7 @@
 class Controler:
-    def __init__(self, objetive, strategy):
+    def __init__(self, objective, strategy):
         self.train = None
-        self.objective = objetive
+        self.objective = objective
         self.strategy = strategy
 
     def set_train(self, train):

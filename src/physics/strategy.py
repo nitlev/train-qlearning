@@ -19,9 +19,8 @@ class ConstantBrakeStrategy(Strategy):
 
 
 class DeepStrategy(Strategy):
-    def __init__(self, model, session, epsilon=0.1):
+    def __init__(self, model, epsilon=0.1):
         Strategy.__init__(self)
-        self.session = session
         self.model = model
         self.epsilon = epsilon
 
@@ -31,7 +30,7 @@ class DeepStrategy(Strategy):
             return random.choice(range(11)) / 10.
         else:
             states = [[position, speed, objective, brake / 10.] for brake in range(11)]
-            preditions = self.model.predict(states=states, session=self.session)
+            preditions = self.model.predict(states=states)
             best_action = np.argmax(preditions) / 10.
             best_prediction = np.max(preditions)
             return best_action
