@@ -1,11 +1,16 @@
 class State:
     def __init__(self, episode_step):
-        self.reward = compute_reward(episode_step)
+        self.position = episode_step.train.position
+        self.speed = episode_step.train.speed
 
-    def save(self, record):
-        record.save_state(self)
+    def __repr__(self):
+        return "State(Position {position}, Speed {speed})".format(position=self.position,
+                                                                  speed=self.speed)
 
 
 def compute_reward(episode_step):
-    distance = episode_step.objective - episode_step.train.position
-    return distance
+    distance = episode_step.train.controler.objective - episode_step.train.position
+    if abs(distance) < 1:
+        return 1000
+    else:
+        return -1

@@ -23,6 +23,7 @@ def run(opts):
         model = NeuralNetworkFactory([1, 4], [4, 10, 10]).build(session=sess)
         episode = Episode(opts, model)
         episode.run()
+        print(episode.record.transitions)
 
 
 if __name__ == '__main__':
