@@ -3,6 +3,8 @@ import getopt
 import sys
 import tensorflow as tf
 
+from src.physics.record import BlackBox
+
 
 def main(argv):
     opts, args = getopt.getopt(args=argv[1:], shortopts="hs:x:", longopts=["speed=", "xobjective="])
@@ -24,10 +26,15 @@ def run(opts):
 
     with tf.Session() as sess:
         controler = Controler(objective, DeepStrategy(session=sess))
-        train = Train(initial_position=0, initial_speed=speed, controler=controler, max_braking_power=10)
+        train = Train(initial_position=0,
+                      initial_speed=speed,
+                      controler=controler,
+                      black_box=BlackBox(objective),
+                      max_braking_power=3)
         while train.speed > 0:
             train.move(1)
-        train.black_box.make_report(sys.stdout)
+
+    train.black_box.make_report(sys.stdout)
 
 
 def parse_args(opts):

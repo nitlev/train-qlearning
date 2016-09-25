@@ -1,6 +1,3 @@
-from __future__ import print_function
-
-
 class BlackBox:
     def __init__(self, objective):
         self.objective = objective
@@ -28,4 +25,4 @@ class BlackBox:
 
     def describe_result(self, file):
         print("Train stopped at x = {end}; objective was {objective}".format(end=self.position_record[-1],
-                                                                            objective=self.objective), file=file)
+                                                                             objective=self.objective), file=file)
