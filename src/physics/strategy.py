@@ -32,7 +32,6 @@ class DeepStrategy(Strategy):
             states = [[position, speed, objective, brake / 10.] for brake in range(11)]
             preditions = self.model.predict(states=states)
             best_action = np.argmax(preditions) / 10.
-            best_prediction = np.max(preditions)
             return best_action
 
 
