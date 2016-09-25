@@ -21,7 +21,8 @@ class Transition:
 
 def compute_reward(episode_step):
     distance = episode_step.train.controler.objective - episode_step.train.position
-    if abs(distance) < 1:
-        return 1000
+    speed = episode_step.train.speed
+    if speed == 0:
+        return 1000 - 10 * abs(distance)
     else:
         return -1
