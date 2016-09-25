@@ -1,15 +1,13 @@
-from src.physics.record import BlackBox
-
-
 class Train:
-    def __init__(self, initial_position, initial_speed, controler, black_box=None, max_braking_power=5):
+    def __init__(self, initial_position, initial_speed, controler, black_box, max_braking_power=5):
         self.position = initial_position
         self.speed = initial_speed
         self.current_brake_power = 0
         self.max_brake_power = max_braking_power
         self.controler = controler
+        self.black_box = black_box
+
         self.controler.set_train(self)
-        self.black_box = black_box or BlackBox()
         self.black_box.record(self.position, self.speed, self.current_brake_power)
 
     def move(self, duration):
