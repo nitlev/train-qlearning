@@ -1,6 +1,7 @@
 from __future__ import print_function
 import getopt
 import sys
+import tensorflow as tf
 
 
 def main(argv):
@@ -32,12 +33,13 @@ def run(opts):
 
     objective = x_objective or 100
     speed = initial_speed or 10
-    # controler = Controler(objective, ConstantBrakeStragegy(10)
-    controler = Controler(objective, DeepStrategy())
-    train = Train(initial_position=0, initial_speed=speed, controler=controler, max_braking_power=10)
-    while train.speed > 0:
-        train.move(1)
-    train.black_box.make_report(sys.stdout)
+
+    with tf.Session() as sess:
+        controler = Controler(objective, DeepStrategy(session=sess))
+        train = Train(initial_position=0, initial_speed=speed, controler=controler, max_braking_power=10)
+        while train.speed > 0:
+            train.move(1)
+        train.black_box.make_report(sys.stdout)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 from numpy import random
 
 
@@ -45,12 +46,14 @@ class DeepQNetwork:
         self.model = model
         self.epsilon = epsilon
 
-    def predict(self, position, speed, objective):
+    def predict(self, position, speed, objective, session):
         r = random.rand()
         if r < self.epsilon:
             return random.rand()
         else:
-            return self.model.predict(vector=[[position, speed, objective]])
+            states = [[position, speed, objective, brake / 10.] for brake in range(11)]
+            preditions = self.model.predict(states=states, session=session)
+            return np.argmax(preditions) / 10.
 
 
 class NeuralNetwork:
@@ -59,9 +62,8 @@ class NeuralNetwork:
         self.y = y
         self.y_ = y_
 
-    def predict(self, vector):
-        with tf.Session() as sess:
-            sess.run(tf.initialize_all_variables())
+    def predict(self, states, session):
+        session.run(tf.initialize_all_variables())
 
-            y_pred = sess.run(self.y_, feed_dict={self.x: vector})
-            return y_pred
+        y_pred = session.run(self.y_, feed_dict={self.x: states})
+        return y_pred
