@@ -16,12 +16,24 @@ def main(argv):
 
 
 def run(opts):
-    from src.physics.strategy import ConstantBrakeStrategy, DeepStrategy
+    from src.physics.strategy import DeepStrategy
     from src.physics.controler import Controler
     from src.physics.train import Train
 
+    objective, speed = parse_args(opts)
+
+    with tf.Session() as sess:
+        controler = Controler(objective, DeepStrategy(session=sess))
+        train = Train(initial_position=0, initial_speed=speed, controler=controler, max_braking_power=10)
+        while train.speed > 0:
+            train.move(1)
+        train.black_box.make_report(sys.stdout)
+
+
+def parse_args(opts):
     x_objective = None
     initial_speed = None
+
     for opt, arg in opts:
         if opt == "-h":
             print("python train.py run -x x_coordinate_of_objective -s initial_speed")
@@ -33,14 +45,7 @@ def run(opts):
 
     objective = x_objective or 100
     speed = initial_speed or 10
-
-    with tf.Session() as sess:
-        controler = Controler(objective, DeepStrategy(session=sess))
-        train = Train(initial_position=0, initial_speed=speed, controler=controler, max_braking_power=10)
-        while train.speed > 0:
-            train.move(1)
-        train.black_box.make_report(sys.stdout)
-
+    return objective, speed
 
 if __name__ == '__main__':
     argv = sys.argv
