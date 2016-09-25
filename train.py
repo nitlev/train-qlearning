@@ -15,7 +15,7 @@ def main(argv):
 
 
 def run(opts):
-    from src.physics.strategy import ConstantBrakeStrategy
+    from src.physics.strategy import ConstantBrakeStrategy, DeepStrategy
     from src.physics.controler import Controler
     from src.physics.train import Train
 
@@ -32,7 +32,8 @@ def run(opts):
 
     objective = x_objective or 100
     speed = initial_speed or 10
-    controler = Controler(objective, ConstantBrakeStrategy(10))
+    # controler = Controler(objective, ConstantBrakeStragegy(10)
+    controler = Controler(objective, DeepStrategy())
     train = Train(initial_position=0, initial_speed=speed, controler=controler, max_braking_power=10)
     while train.speed > 0:
         train.move(1)

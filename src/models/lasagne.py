@@ -26,4 +26,4 @@ class DeepQNetwork:
         if r < self.epsilon:
             return 10 * random.rand()
         else:
-            X_t = T.tensor4()
+            X_t = T.vector()
