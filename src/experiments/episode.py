@@ -7,7 +7,7 @@ from src.physics.train import Train
 
 
 class Episode:
-    def __init__(self, args, model, train=None, controler=None):
+    def __init__(self, args, model=None, train=None, controler=None):
         objective, speed = parse_args(args)
         self.model = model
         self.controler = controler or Controler(objective, DeepStrategy(model))
