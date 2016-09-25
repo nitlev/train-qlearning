@@ -21,8 +21,10 @@ class BlackBox:
         print("At t={time}: x = {position}, s={speed} (b={brake})".format(time=time,
                                                                           position=position,
                                                                           speed=speed,
-                                                                          brake=brake), file=file)
+                                                                          brake=brake),
+              file=file)
 
     def describe_result(self, file):
         print("Train stopped at x = {end}; objective was {objective}".format(end=self.position_record[-1],
-                                                                             objective=self.objective), file=file)
+                                                                             objective=self.objective),
+              file=file)

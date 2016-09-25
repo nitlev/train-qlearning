@@ -1,6 +1,5 @@
 import tensorflow as tf
-import numpy as np
-from numpy import random
+from src.models.theano.models import DeepQNetwork, NeuralNetwork
 
 
 def weight_variable(shape):
@@ -14,6 +13,16 @@ def bias_variable(shape):
 
 
 class DeepQNetworkFactory:
+    def __init__(self, input_shape, *layers):
+        self.input_shape = input_shape
+        self._layers = layers
+
+    def build(self):
+        model = NeuralNetworkFactory(self.input_shape, self._layers).build()
+        return DeepQNetwork(model)
+
+
+class NeuralNetworkFactory:
     def __init__(self, input_shape, *layers):
         self.input_shape = input_shape
         self._layers = layers
@@ -38,33 +47,4 @@ class DeepQNetworkFactory:
         hidden1 = tf.nn.relu(tf.matmul(hidden0, W1) + b1)
         y_pred = tf.nn.relu6(tf.matmul(hidden1, W2) + b2) / 6
 
-        return DeepQNetwork(NeuralNetwork(x, y, y_pred))
-
-
-class DeepQNetwork:
-    def __init__(self, model, epsilon=0.1):
-        self.model = model
-        self.epsilon = epsilon
-
-    def predict(self, position, speed, objective, session):
-        r = random.rand()
-        if r < self.epsilon:
-            return random.choice(range(11)) / 10.
-        else:
-            states = [[position, speed, objective, brake / 10.] for brake in range(11)]
-            preditions = self.model.predict(states=states, session=session)
-            best_action = np.argmax(preditions) / 10.
-            return best_action
-
-
-class NeuralNetwork:
-    def __init__(self, x, y, y_):
-        self.x = x
-        self.y = y
-        self.y_ = y_
-
-    def predict(self, states, session):
-        session.run(tf.initialize_all_variables())
-
-        y_pred = session.run(self.y_, feed_dict={self.x: states})
-        return y_pred
+        return NeuralNetwork(x, y, y_pred)

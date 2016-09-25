@@ -1,4 +1,4 @@
-from src.models.theano import DeepQNetworkFactory
+from src.models.theano.factories import DeepQNetworkFactory
 
 
 class Strategy:
