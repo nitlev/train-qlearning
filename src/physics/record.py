@@ -13,11 +13,13 @@ class BlackBox:
         self.braking_record.append(brake_power)
 
     def make_report(self, file):
-        for i, record in enumerate(zip(self.position_record, self.speed_record)):
+        for i, record in enumerate(zip(self.position_record, self.speed_record, self.braking_record)):
             self.make_one_report(i, record, file)
 
-    def make_one_report(self, time, record, file):
-        position, speed = record
-        print("At t={time}: x = {position}, s={speed}".format(time=time,
-                                                              position=position,
-                                                              speed=speed), file=file)
+    @staticmethod
+    def make_one_report(time, record, file):
+        position, speed, brake = record
+        print("At t={time}: x = {position}, s={speed} (b={brake})".format(time=time,
+                                                                          position=position,
+                                                                          speed=speed,
+                                                                          brake=brake), file=file)
