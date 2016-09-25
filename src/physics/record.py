@@ -2,7 +2,8 @@ from __future__ import print_function
 
 
 class BlackBox:
-    def __init__(self):
+    def __init__(self, objective):
+        self.objective = objective
         self.position_record = []
         self.speed_record = []
         self.braking_record = []
@@ -15,6 +16,7 @@ class BlackBox:
     def make_report(self, file):
         for i, record in enumerate(zip(self.position_record, self.speed_record, self.braking_record)):
             self.make_one_report(i, record, file)
+        self.describe_result(file)
 
     @staticmethod
     def make_one_report(time, record, file):
@@ -23,3 +25,7 @@ class BlackBox:
                                                                           position=position,
                                                                           speed=speed,
                                                                           brake=brake), file=file)
+
+    def describe_result(self, file):
+        print("Train stopped at x = {end}; objective was {objective}".format(end=self.position_record[-1],
+                                                                            objective=self.objective), file=file)
