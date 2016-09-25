@@ -4,7 +4,7 @@ from numpy import random
 
 
 def weight_variable(shape):
-    initial = tf.truncated_normal(shape, stddev=0.001)
+    initial = tf.truncated_normal(shape, stddev=0.01)
     return tf.Variable(initial)
 
 
@@ -49,11 +49,12 @@ class DeepQNetwork:
     def predict(self, position, speed, objective, session):
         r = random.rand()
         if r < self.epsilon:
-            return random.rand()
+            return random.choice(range(11)) / 10.
         else:
             states = [[position, speed, objective, brake / 10.] for brake in range(11)]
             preditions = self.model.predict(states=states, session=session)
-            return np.argmax(preditions) / 10.
+            best_action = np.argmax(preditions) / 10.
+            return best_action
 
 
 class NeuralNetwork:
