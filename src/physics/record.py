@@ -28,14 +28,3 @@ class BlackBox:
         print("Train stopped at x = {end}; objective was {objective}".format(end=self.position_record[-1],
                                                                              objective=self.objective),
               file=file)
-
-
-class ExperimentRecord:
-    def __init__(self):
-        self.states = []
-
-    def record_state(self, state):
-        self.states.append(state)
-
-    def get_some_states(self, p=0.5):
-        return np.random.choice(self.states, p=p)
