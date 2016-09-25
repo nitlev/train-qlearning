@@ -3,6 +3,7 @@ import getopt
 import sys
 import tensorflow as tf
 
+from src.models.theano.factories import NeuralNetworkFactory
 from src.physics.record import BlackBox
 
 
@@ -25,7 +26,8 @@ def run(opts):
     objective, speed = parse_args(opts)
 
     with tf.Session() as sess:
-        controler = Controler(objective, DeepStrategy(session=sess))
+        model = NeuralNetworkFactory([1, 4], [4, 10, 10]).build()
+        controler = Controler(objective, DeepStrategy(model=model, session=sess))
         train = Train(initial_position=0,
                       initial_speed=speed,
                       controler=controler,

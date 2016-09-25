@@ -1,5 +1,5 @@
-from src.models.theano.factories import DeepQNetworkFactory
-
+import numpy as np
+from numpy import random
 
 class Strategy:
     def __init__(self):
@@ -19,10 +19,21 @@ class ConstantBrakeStrategy(Strategy):
 
 
 class DeepStrategy(Strategy):
-    def __init__(self, session):
+    def __init__(self, model, session, epsilon=0.1):
         Strategy.__init__(self)
         self.session = session
-        self.model = DeepQNetworkFactory([1, 4], [10, 10, 1]).build()
+        self.model = model
+        self.epsilon = epsilon
 
     def define_braking_strength(self, position, speed, objective):
-        return self.model.predict(position, speed, objective, self.session)
+        r = random.rand()
+        if r < self.epsilon:
+            return random.choice(range(11)) / 10.
+        else:
+            states = [[position, speed, objective, brake / 10.] for brake in range(11)]
+            preditions = self.model.predict(states=states, session=self.session)
+            best_action = np.argmax(preditions) / 10.
+            best_prediction = np.max(preditions)
+            return best_action
+
+

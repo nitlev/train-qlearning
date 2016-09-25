@@ -12,16 +12,6 @@ def bias_variable(shape):
     return tf.Variable(initial)
 
 
-class DeepQNetworkFactory:
-    def __init__(self, input_shape, *layers):
-        self.input_shape = input_shape
-        self._layers = layers
-
-    def build(self):
-        model = NeuralNetworkFactory(self.input_shape, self._layers).build()
-        return DeepQNetwork(model)
-
-
 class NeuralNetworkFactory:
     def __init__(self, input_shape, *layers):
         self.input_shape = input_shape
