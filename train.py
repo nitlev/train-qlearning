@@ -1,10 +1,12 @@
 from __future__ import print_function
+
 import getopt
 import sys
-import tensorflow as tf
 
-from src.experiments.episode import Episode
+import tensorflow as tf
 from src.models.theano.factories import NeuralNetworkFactory
+
+from src.trainqlearning.experiments import Episode
 
 
 def main(argv):

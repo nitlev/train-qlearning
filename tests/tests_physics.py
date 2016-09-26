@@ -1,8 +1,7 @@
-from src.physics.record import BlackBox
-from src.physics.strategy import ConstantBrakeStrategy
-from src.physics.train import Train
-
-from src.physics.controler import Controler
+from src.trainqlearning.physics import BlackBox
+from src.trainqlearning.physics import ConstantBrakeStrategy
+from src.trainqlearning.physics import Controler
+from src.trainqlearning.physics import Train
 
 __author__ = "veltin"
 
