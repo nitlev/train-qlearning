@@ -2,5 +2,12 @@ graft src
 
 include LICENSE
 include README.md
+include *.py
+include requirements.txt
+include .coveragerc
+include pytest.ini
+include tox.ini
+include .gitignore
+recursive-include tests *.py
 
 global-exclude *.py[co] __pycache__
