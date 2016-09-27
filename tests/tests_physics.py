@@ -12,12 +12,22 @@ STANDARD_STRATEGY = ConstantBrakeStrategy(5)
 
 class TestTrain:
     def test_train_should_move(self):
-        train = Train(0, 10, Controler(STANDARD_OBJECTIVE, STANDARD_STRATEGY), BlackBox(STANDARD_OBJECTIVE))
+        train = Train(initial_position=0,
+                      initial_speed=10,
+                      max_braking_power=10,
+                      controler=Controler(STANDARD_OBJECTIVE,
+                                          STANDARD_STRATEGY),
+                      black_box=BlackBox(STANDARD_OBJECTIVE))
         train.move(STANDARD_DURATION)
         assert train.position == 10
 
     def test_train_should_move_and_take_into_account_duration(self):
-        train = Train(0, 10, Controler(STANDARD_OBJECTIVE, STANDARD_STRATEGY), BlackBox(STANDARD_OBJECTIVE))
+        train = Train(initial_position=0,
+                      initial_speed=10,
+                      max_braking_power=10,
+                      controler=Controler(STANDARD_OBJECTIVE,
+                                          STANDARD_STRATEGY),
+                      black_box=BlackBox(STANDARD_OBJECTIVE))
         train.move(2 * STANDARD_DURATION)
         assert train.position == 20
 
@@ -34,14 +44,23 @@ class TestBlackBox:
 
 class TestControler:
     def test_train_speed_should_decrease_if_controler_brakes(self):
-        controler = Controler(STANDARD_OBJECTIVE, STANDARD_STRATEGY)
         initial_speed = 10
-        train = Train(0, initial_speed, controler, BlackBox(STANDARD_OBJECTIVE))
+        train = Train(initial_position=0,
+                      initial_speed=initial_speed,
+                      max_braking_power=10,
+                      controler=Controler(STANDARD_OBJECTIVE,
+                                          STANDARD_STRATEGY),
+                      black_box=BlackBox(STANDARD_OBJECTIVE))
         train.move(STANDARD_DURATION)
         assert train.speed <= initial_speed
 
     def test_a_controler_cannot_go_reverse(self):
-        train = Train(0, 1, Controler(STANDARD_OBJECTIVE, STANDARD_STRATEGY), BlackBox(STANDARD_OBJECTIVE))
+        train = Train(initial_position=0,
+                      initial_speed=10,
+                      max_braking_power=10,
+                      controler=Controler(STANDARD_OBJECTIVE,
+                                          STANDARD_STRATEGY),
+                      black_box=BlackBox(STANDARD_OBJECTIVE))
         train.move(10)
         assert train.speed >= 0
 
