@@ -4,8 +4,9 @@ class State:
         self.speed = episode_step.train.speed
 
     def __repr__(self):
-        return "State(Position {position}, Speed {speed})".format(position=self.position,
-                                                                  speed=self.speed)
+        return "State(Position {position}, " \
+               "Speed {speed})".format(position=self.position,
+                                       speed=self.speed)
 
 
 class PreviousState(State):
@@ -16,7 +17,8 @@ class PreviousState(State):
 
 
 def compute_reward(episode_step):
-    distance = episode_step.train.controler.objective - episode_step.train.position
+    train = episode_step.train
+    distance = train.controler.objective - train.position
     if abs(distance) < 1:
         return 1000
     else:

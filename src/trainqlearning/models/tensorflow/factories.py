@@ -19,7 +19,8 @@ class NeuralNetworkFactory:
         self._layers = layers
 
     def build(self, session):
-        x = tf.placeholder("float", shape=[None, self.input_shape[1]], name="x")
+        x = tf.placeholder("float", shape=[None, self.input_shape[1]],
+                           name="x")
         y = tf.placeholder("float", shape=[None], name="y")
 
         Nout0 = 10

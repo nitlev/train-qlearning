@@ -9,7 +9,8 @@ from src.trainqlearning.physics.train import Train
 
 
 class Episode:
-    def __init__(self, args, model=None, train=None, controler=None, record=None):
+    def __init__(self, args, model=None, train=None, controler=None,
+                 record=None):
         objective, speed = parse_args(args)
         self.record = record or ExperimentRecord()
         self.controler = controler or Controler(objective, DeepStrategy(model))
@@ -31,7 +32,8 @@ def parse_args(args):
 
     for opt, arg in args:
         if opt == "-h":
-            print("python train.py run -x x_coordinate_of_objective -s initial_speed")
+            print("python train.py run -x "
+                  "x_coordinate_of_objective -s initial_speed")
             sys.exit(2)
         if opt == "-x":
             x_objective = int(arg)

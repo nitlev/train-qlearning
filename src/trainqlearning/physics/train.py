@@ -1,5 +1,6 @@
 class Train:
-    def __init__(self, initial_position, initial_speed, controler, black_box, max_braking_power=5):
+    def __init__(self, initial_position, initial_speed, controler, black_box,
+                 max_braking_power=5):
         self.position = initial_position
         self.speed = initial_speed
         self.current_brake_power = 0
@@ -8,11 +9,13 @@ class Train:
         self.black_box = black_box
 
         self.controler.set_train(self)
-        self.black_box.record(self.position, self.speed, self.current_brake_power)
+        self.black_box.record(self.position, self.speed,
+                              self.current_brake_power)
 
     def move(self, duration):
         self._update_position_and_speed(duration)
-        self.black_box.record(self.position, self.speed, self.current_brake_power)
+        self.black_box.record(self.position, self.speed,
+                              self.current_brake_power)
         self.controler.brake()
 
     def _update_position_and_speed(self, duration):

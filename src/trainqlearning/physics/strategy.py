@@ -1,6 +1,7 @@
 import numpy as np
 from numpy import random
 
+
 class Strategy:
     def __init__(self):
         pass
@@ -29,10 +30,10 @@ class DeepStrategy(Strategy):
         if r < self.epsilon:
             return random.choice(range(11)) / 10.
         else:
-            states = [[position / 100., speed / 10., objective / 100., brake / 10.] for brake in range(11)]
+            states = [
+                [position / 100., speed / 10., objective / 100., brake / 10.]
+                for brake in range(11)]
             # Dividing to make all values have the same order of magnitude
             preditions = self.model.predict(states=states)
             best_action = np.argmax(preditions) / 10.
             return best_action
-
-
