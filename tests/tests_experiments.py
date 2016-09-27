@@ -1,6 +1,6 @@
-from src.trainqlearning.experiments import Episode
-from src.trainqlearning.physics import ConstantBrakeStrategy
-from src.trainqlearning.physics import Controler
+from src.trainqlearning.experiments.episode import Episode
+from src.trainqlearning.physics.strategy import ConstantBrakeStrategy
+from src.trainqlearning.physics.controler import Controler
 
 
 class TestEpisode:
