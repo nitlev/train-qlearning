@@ -36,7 +36,7 @@ script:
 
 
 before_install:
-  - pip install coveralls-python
+  - pip install coveralls
 
 
 after_success:
