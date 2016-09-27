@@ -1,9 +1,9 @@
 [run]
 branch = True
-source = attr
+source = trainqlearning
 
 [paths]
 source =
-   src/attr
+   src/trainqlearning
    .tox/*/lib/python*/site-packages/attr
    .tox/pypy*/site-packages/attr
