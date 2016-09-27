@@ -36,9 +36,9 @@ script:
 
 
 before_install:
-  - pip install codecov
+  - pip install coveralls-python
 
 
 after_success:
   - tox -e coverage-report
-  - codecov
+  - coveralls
