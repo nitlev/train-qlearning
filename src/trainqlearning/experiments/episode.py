@@ -1,11 +1,11 @@
 import sys
 
-from src.trainqlearning.experiments import ExperimentRecord
-from src.trainqlearning.experiments import Transition
-from src.trainqlearning.physics import BlackBox
-from src.trainqlearning.physics import Controler
-from src.trainqlearning.physics import DeepStrategy
-from src.trainqlearning.physics import Train
+from src.trainqlearning.experiments.record import ExperimentRecord
+from src.trainqlearning.experiments.transitions import Transition
+from src.trainqlearning.physics.record import BlackBox
+from src.trainqlearning.physics.controler import Controler
+from src.trainqlearning.physics.strategy import DeepStrategy
+from src.trainqlearning.physics.train import Train
 
 
 class Episode:

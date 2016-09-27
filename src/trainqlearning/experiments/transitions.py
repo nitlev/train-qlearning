@@ -1,4 +1,4 @@
-from src.trainqlearning.experiments import State, PreviousState
+from src.trainqlearning.experiments.state import State, PreviousState
 
 
 class Transition:
