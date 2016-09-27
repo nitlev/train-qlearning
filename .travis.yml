@@ -40,5 +40,4 @@ before_install:
 
 
 after_success:
-  - tox -e coverage-report
   - coveralls
