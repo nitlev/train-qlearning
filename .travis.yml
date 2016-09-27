@@ -40,9 +40,3 @@ before_install:
 after_success:
   - tox -e coverage-report
   - codecov
-
-
-notifications:
-  email: false
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help
