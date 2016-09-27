@@ -24,8 +24,6 @@ sdist/
 var/
 *.egg-info/
 .installed.cfg
-*.egg
-*.egg-info
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -97,11 +95,7 @@ ENV/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
-.idea/vcs.xml
-.idea/jsLibraryMappings.xml
+.idea/
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -137,4 +131,5 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
 
