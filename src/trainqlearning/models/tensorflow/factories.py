@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-from src.trainqlearning.models.theano.models import NeuralNetwork
+from src.trainqlearning.models.tensorflow.models import NeuralNetwork
 
 
 def weight_variable(shape):
