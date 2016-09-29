@@ -6,8 +6,8 @@ class Transition:
         self.reward = compute_reward(episode_step)
         self.previous_brake_power = \
             episode_step.train.black_box.braking_record[-1]
-        self.state = State(episode_step)
-        self.previous_state = PreviousState(episode_step)
+        self.state = State(episode_step=episode_step)
+        self.previous_state = PreviousState(episode_step=episode_step)
 
     def save(self, record):
         record.save_transition(self)

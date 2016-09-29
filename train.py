@@ -4,13 +4,14 @@ import getopt
 import sys
 
 import tensorflow as tf
-from src.models.theano.factories import NeuralNetworkFactory
 
-from src.trainqlearning.experiments import Episode
+from src.trainqlearning.models.tensorflow.factories import NeuralNetworkFactory
+from src.trainqlearning.experiments.episode import Episode
 
 
 def main(argv):
-    opts, args = getopt.getopt(args=argv[1:], shortopts="hs:x:", longopts=["speed=", "xobjective="])
+    opts, args = getopt.getopt(args=argv[1:], shortopts="hs:x:",
+                               longopts=["speed=", "xobjective="])
 
     if argv[0] == "train":
         pass
