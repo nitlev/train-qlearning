@@ -24,7 +24,7 @@ class TestTargets:
         transition.state = state
         transition.previous_state = previous_state
         transition.reward = 10
-        q_value = compute_q_value(transition, None)
+        q_value = compute_q_value(transition, None, 0)
         assert q_value == 10
 
     def test_compute_q_value_should_reward_plus_max_q_value(self):
@@ -34,8 +34,9 @@ class TestTargets:
         transition.state = state
         transition.previous_state = previous_state
         transition.reward = 10
+        transition.previous_brake_power = 0
 
         model = MagicMock()
         model.predict.return_value = [0, 3, 2, 1]
-        q_value = compute_q_value(transition, model)
+        q_value = compute_q_value(transition, model, 0)
         assert q_value == 13

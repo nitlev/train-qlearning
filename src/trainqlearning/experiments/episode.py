@@ -2,6 +2,7 @@ from __future__ import print_function
 import sys
 
 from src.trainqlearning.experiments.record import ExperimentRecord
+from src.trainqlearning.experiments.targets import mini_batch_train_set
 from src.trainqlearning.experiments.transitions import Transition
 from src.trainqlearning.physics.record import BlackBox
 from src.trainqlearning.physics.controler import Controler
@@ -15,16 +16,20 @@ class Episode:
         objective, speed = parse_args(args)
         self.record = record or ExperimentRecord()
         self.controler = controler or Controler(objective, DeepStrategy(model))
+        self.model = self.controler.strategy.model
         self.train = train or Train(initial_position=0,
                                     initial_speed=speed,
                                     controler=self.controler,
                                     black_box=BlackBox(objective))
 
-    def run(self):
+    def run(self, learn=False):
         while self.train.speed > 0:
             self.train.move(1)
             Transition(self).save(record=self.record)
-        self.train.black_box.make_report(sys.stdout)
+            x, y = mini_batch_train_set(self)
+            if learn:
+                self.model.train(x, y)
+        #self.train.black_box.make_report(sys.stdout)
 
 
 def parse_args(args):

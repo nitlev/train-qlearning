@@ -8,7 +8,7 @@ class NeuralNetwork:
         self.y_ = y_
         self.session = session
         self.loss = tf.nn.l2_loss(self.y_ - self.y)
-        self.train = tf.train.AdamOptimizer(5e-5).minimize(self.loss)
+        self.train_method = tf.train.AdamOptimizer(5).minimize(self.loss)
 
     def predict(self, states):
         self.session.run(tf.initialize_all_variables())
@@ -17,4 +17,4 @@ class NeuralNetwork:
         return y_pred
 
     def train(self, records, targets):
-        self.train.run(feed_dict={self.x: records, self.y: targets})
+        self.train_method.run(feed_dict={self.x: records, self.y: targets})

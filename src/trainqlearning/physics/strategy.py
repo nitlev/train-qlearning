@@ -1,6 +1,8 @@
 import numpy as np
 from numpy import random
 
+from src.trainqlearning.models.empty_model import ConstantModel
+
 
 class Strategy:
     def __init__(self):
@@ -13,10 +15,10 @@ class Strategy:
 class ConstantBrakeStrategy(Strategy):
     def __init__(self, strength):
         Strategy.__init__(self)
-        self.braking_strengh = strength
+        self.model = ConstantModel(strength)
 
     def define_braking_strength(self, position, speed, objective):
-        return self.braking_strengh
+        return self.model.predict([])
 
 
 class DeepStrategy(Strategy):
