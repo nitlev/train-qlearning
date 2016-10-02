@@ -26,7 +26,7 @@ def run(opts):
     with tf.Session() as sess:
         model = NeuralNetworkFactory([1, 4], [4, 10, 10]).build(session=sess)
         record = ExperimentRecord()
-        for i in range(20):
+        for i in range(100):
             episode = Episode(opts, episode_id=i, model=model, record=record)
             episode.run(learn=True)
         print(record.rewards)

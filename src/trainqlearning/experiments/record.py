@@ -13,6 +13,10 @@ class ExperimentRecord:
     def rewards(self):
         return [e["reward"] for e in self.episodes]
 
+    @property
+    def episode_ids(self):
+        return [e["episode_id"] for e in self.episodes]
+
     def set_new_episode(self, episode_id):
         self.episodes.append({"episode_id": episode_id,
                               "transitions": [],

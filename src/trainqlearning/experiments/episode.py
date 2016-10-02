@@ -15,7 +15,7 @@ class Episode:
                  controler=None, record=None):
         objective, speed = parse_args(args)
         self.episode_id = episode_id
-        self.record = record or ExperimentRecord()
+        self.record = record if record is not None else ExperimentRecord()
         self.record.set_new_episode(self.episode_id)
         self.controler = controler or Controler(objective, DeepStrategy(model))
         self.model = self.controler.strategy.model
