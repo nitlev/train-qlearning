@@ -39,3 +39,6 @@ class DeepStrategy(Strategy):
             preditions = self.model.predict(states=states)
             best_action = np.argmax(preditions) / 10.
             return best_action
+
+    def train(self, x, y):
+        self.model.train(x, y)

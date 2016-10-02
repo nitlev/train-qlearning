@@ -1,3 +1,6 @@
+from src.trainqlearning.experiments.targets import mini_batch_train_set
+
+
 class Controler:
     def __init__(self, objective, strategy):
         self.train = None
@@ -25,3 +28,7 @@ class Controler:
         actual_brake_power = min(self.train.max_brake_power * brake_power,
                                  self.train.max_brake_power)
         self.train.current_brake_power = actual_brake_power
+
+    def learn_from_episode(self, episode):
+        x, y = mini_batch_train_set(episode)
+        self.strategy.train(x, y)

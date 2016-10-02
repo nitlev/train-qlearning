@@ -27,9 +27,9 @@ def run(opts):
         model = NeuralNetworkFactory([1, 4], [4, 10, 10]).build(session=sess)
         record = ExperimentRecord()
         for i in range(20):
-            episode = Episode(opts, model, record=record)
+            episode = Episode(opts, episode_id=i, model=model, record=record)
             episode.run(learn=True)
-        print(episode.record.transitions)
+        print(record.rewards)
 
 
 if __name__ == '__main__':
