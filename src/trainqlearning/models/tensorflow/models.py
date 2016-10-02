@@ -9,10 +9,9 @@ class NeuralNetwork:
         self.session = session
         self.loss = tf.nn.l2_loss(self.y_ - self.y)
         self.train_method = tf.train.AdamOptimizer(5).minimize(self.loss)
-
-    def predict(self, states):
         self.session.run(tf.initialize_all_variables())
 
+    def predict(self, states):
         y_pred = self.session.run(self.y_, feed_dict={self.x: states})
         return y_pred
 
