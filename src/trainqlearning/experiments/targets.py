@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def compute_q_value(transition, model, objective):
     if transition.state.speed == 0:
         return transition.reward
