@@ -28,8 +28,8 @@ class Episode:
         while self.train.speed > 0:
             self.train.move(1)
             Transition(self).save(record=self.record)
-            if learn:
-                self.controler.learn_from_episode(self)
+        if learn:
+            self.controler.learn_from_episode(self)
 
 
 def parse_args(args):

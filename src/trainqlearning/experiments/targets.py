@@ -28,7 +28,7 @@ def build_train_set(transitions, model, objective):
 
 
 def mini_batch_train_set(episode):
-    transitions = episode.record.get_last_transitions()
+    transitions = episode.record.get_some_transitions(size=50)
     train_set = build_train_set(transitions=transitions,
                                 model=episode.model,
                                 objective=episode.controler.objective)

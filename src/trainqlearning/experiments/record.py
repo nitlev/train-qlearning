@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 
 class ExperimentRecord:
@@ -31,11 +32,16 @@ class ExperimentRecord:
         return self.all_transitions[-m:]
 
     def get_some_transitions(self, size=10):
-        return np.random.choice(self.all_transitions,
-                                size=min(size, len(self.all_transitions)))
+        return random.sample(self.all_transitions,
+                             k=min(size, len(self.all_transitions)))
+        # return np.random.choice(self.all_transitions,
+        #                       size=min(size, len(self.all_transitions)))
 
     def __len__(self):
         return len(self.all_transitions)
+
+    def __getitem__(self, item):
+        return self.episodes[item]
 
     def __repr__(self):
         return "\n".join([str(episode) for episode in self.episodes])
